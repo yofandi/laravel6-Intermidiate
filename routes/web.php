@@ -10,7 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+app()->bind('contoh', function (){
+    return new \App\Tabungan;
+});
+
+// app()->singleton('contoh', function (){
+//     return new \App\Tabungan;
+// });
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    dd(app('contoh'), app('contoh'));
 });
