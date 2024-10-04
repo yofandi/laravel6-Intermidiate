@@ -65,7 +65,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        event(new UserLogged($request, 'logout'));
+        event(new Userlogged($request, 'logout'));
         $this->guard()->logout();
 
         $request->session()->invalidate();

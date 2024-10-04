@@ -44,15 +44,15 @@ class LaravelCommand extends Command
         $this->error('something went wrong');
         $this->line('display this on the screen');
 
-        $this->line(print_r($this->options()) . ' '. print_r($this->arguments()));
+        $this->line(print_r($this->options()) . ' ' . print_r($this->arguments()));
 
-        $this->line($this->option('opsi'). ' ' . $this->argument('argument'));
+        $this->line($this->option('opsi') . ' ' . $this->argument('argument'));
 
         $name = $this->ask('what is your name?');
         $password  = $this->secret('input your password!');
 
         if ($this->confirm('Do you want to continue?')) {
-            $this->line($name. ' ' . $password);
+            $this->line($name . ' ' . $password);
         }
     }
 }

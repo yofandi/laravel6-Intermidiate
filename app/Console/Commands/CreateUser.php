@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-class CreateUsers extends Command
+class CreateUser extends Command
 {
     /**
      * The name and signature of the console command.
@@ -41,7 +41,7 @@ class CreateUsers extends Command
     {
         $name = $this->ask('Input name!');
         $email = $this->ask('input your email');
-        $password = $this->secret('input your password!');
+        $password = $this->secret('input your secret!');
 
         $this->line("user: {$name} <{$email}>");
 

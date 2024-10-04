@@ -19,9 +19,9 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        '\App\Events\UserLogged' => [
-            '\App\Listeners\GenerateLog'
-        ],
+        'App\Events\UserLogged' => [
+            'App\Listeners\GenerateLog'
+        ]
     ];
 
     /**
