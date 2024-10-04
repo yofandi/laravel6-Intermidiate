@@ -12,7 +12,7 @@ class LaravelCommand extends Command
      * @var string
      */
     protected $signature = 'laravel:basic
-                            {argument: ini adalah deskripsi argumen}
+                            {argument : ini adalah deskripsi argumen}
                             {--o|opsi= : ini adalah deskripsi opsi}
                             ';
 
@@ -40,6 +40,19 @@ class LaravelCommand extends Command
      */
     public function handle()
     {
-        //
+        $this->info('informasi muncul dalam terminal');
+        $this->error('something went wrong');
+        $this->line('display this on the screen');
+
+        $this->line(print_r($this->options()) . ' '. print_r($this->arguments()));
+
+        $this->line($this->option('opsi'). ' ' . $this->argument('argument'));
+
+        $name = $this->ask('what is your name?');
+        $password  = $this->secret('input your password!');
+
+        if ($this->confirm('Do you want to continue?')) {
+            $this->line($name. ' ' . $password);
+        }
     }
 }
