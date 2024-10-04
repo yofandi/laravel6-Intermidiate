@@ -2,9 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\Userlogged;
+use App\Events\UserLogged;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Storage;
 
 class GenerateLog
 {
@@ -21,11 +22,12 @@ class GenerateLog
     /**
      * Handle the event.
      *
-     * @param  Userlogged  $event
+     * @param  UserLogged  $event
      * @return void
      */
-    public function handle(Userlogged $event)
+    public function handle(UserLogged $event)
     {
-        //
+        $message = now() . " {$event->request->user()->name} just {$event->type} from the application";
+        Storage::append('file.log', $message);
     }
 }

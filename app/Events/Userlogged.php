@@ -8,20 +8,24 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Http\Request;
 use Illuminate\Queue\SerializesModels;
 
-class Userlogged
+class UserLogged
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $type;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request, $type)
     {
-        //
+        $this->request = $request;
+        $this->type = $type;
     }
 
     /**
