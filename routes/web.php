@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-app()->bind('contoh', function (){
+app()->bind('contoh', function () {
     return new \App\Tabungan;
 });
 

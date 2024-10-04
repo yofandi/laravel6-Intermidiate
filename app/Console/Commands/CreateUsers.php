@@ -41,7 +41,7 @@ class CreateUsers extends Command
     {
         $name = $this->ask('Input name!');
         $email = $this->ask('input your email');
-        $password = $this->secret('input your secret!');
+        $password = $this->secret('input your password!');
 
         $this->line("user: {$name} <{$email}>");
 
