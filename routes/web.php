@@ -1,7 +1,9 @@
 <?php
 
+use App\Notifications\NewVisitor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Notifications\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,8 @@ app()->bind('contoh', function () {
 // });
 
 Route::get('/', function () {
+    $user =  Auth::user();
+    $user->notify(new NewVisitor("Welcome {$user->name}"));
     return view('welcome');
     // dd(app('contoh'), app('contoh'));
 });
