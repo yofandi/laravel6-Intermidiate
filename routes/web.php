@@ -3,7 +3,7 @@
 use App\Notifications\NewVisitor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,8 @@ app()->bind('contoh', function () {
 
 Route::get('/', function () {
     $user =  Auth::user();
-    $user->notify(new NewVisitor("Welcome {$user->name}"));
+    // $user->notify(new NewVisitor("Welcome {$user->name}"));
+    Notification::send($user, new NewVisitor("Welcome {$user->name}"));
     return view('welcome');
     // dd(app('contoh'), app('contoh'));
 });
