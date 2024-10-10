@@ -1,6 +1,7 @@
 <?php
 
 use App\Notifications\NewVisitor;
+use App\Notifications\TelegramNotif;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Notification;
@@ -27,7 +28,11 @@ app()->bind('contoh', function () {
 Route::get('/', function () {
     $user =  Auth::user();
     // $user->notify(new NewVisitor("Welcome {$user->name}"));
-    Notification::send($user, new NewVisitor("Welcome {$user->name}"));
+    if (Auth::check()) {
+        Notification::send($user, new NewVisitor("Welcome {$user->name}"));
+        // $user->notify(new TelegramNotif());
+        Notification::send($user, new TelegramNotif());
+    }
     return view('welcome');
     // dd(app('contoh'), app('contoh'));
 });
