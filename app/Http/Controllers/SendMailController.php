@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\SendMailable;
+use App\Jobs\SendMailJob;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class SendMailController extends Controller
 {
     function sendMail()
     {
-        Mail::to('yofandirikiwinata12@gmail.com')
-            ->send(new SendMailable());
-
+        SendMailJob::dispatch()->delay(now()->addSecond(5));
         echo "email sent";
     }
 }
