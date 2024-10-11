@@ -31,11 +31,14 @@ Route::get('/', function () {
     if (Auth::check()) {
         Notification::send($user, new NewVisitor("Welcome {$user->name}"));
         // $user->notify(new TelegramNotif());
+        // https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id
         Notification::send($user, new TelegramNotif());
     }
     return view('welcome');
     // dd(app('contoh'), app('contoh'));
 });
+
+Route::get('/email/send', 'SendMailController@sendMail');
 
 Auth::routes();
 
