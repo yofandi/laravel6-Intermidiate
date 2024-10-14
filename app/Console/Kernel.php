@@ -28,8 +28,17 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         // $schedule->command('daily:word')->everyMinute();
-        $schedule->job(new SendMailJob)->everyMinute();
-        $schedule->command('queue:work')->everyMinute();
+        // $schedule->job(new SendMailJob)->everyMinute();
+        // $schedule->command('queue:work')->everyMinute();
+
+        $host = config('database.connections.mysql.host');
+        $username = config('database.connections.mysql.username');
+        $password = config('database.connections.mysql.password');
+        $database = config('database.connections.mysql.database');
+
+        $schedule->exec("mysqldump -h {$host} -u {$username} -p{$password} {$database}")
+            ->everyMinute()
+            ->sendOutputTo(public_path('daily_backup.sql'));
     }
 
     /**
