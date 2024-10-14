@@ -1,40 +1,44 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands;
 
 use App\User;
-use App\Mail\SendMailable;
-use Illuminate\Bus\Queueable;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 
-class SendMailJob implements ShouldQueue
+class DailyWord extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'daily:word';
 
     /**
-     * Create a new job instance.
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'send daily email all users';
+
+    /**
+     * Create a new command instance.
      *
      * @return void
      */
     public function __construct()
     {
-        //
+        parent::__construct();
     }
 
     /**
-     * Execute the job.
+     * Execute the console command.
      *
-     * @return void
+     * @return mixed
      */
     public function handle()
     {
-        // Mail::to('yofandirikiwinata12@gmail.com')
-        // ->send(new SendMailable());
-
         $words = [
             'aberration' => 'a state or condition markedly different from the norm',
             'convivial' => 'occupied with or fond of the pleasures of good company',
@@ -50,7 +54,7 @@ class SendMailJob implements ShouldQueue
             Mail::raw("{$key} -> {$value}", function ($mail) use ($user) {
                 $mail->from('yofandirikiwinata34@gmail.com');
                 $mail->to('yofandirikiwinata12@gmail.com')
-                    ->subject('is Good all the time');
+                    ->subject('ini percobaan saya dalam mengirim email');
             });
 
             sleep(5);
