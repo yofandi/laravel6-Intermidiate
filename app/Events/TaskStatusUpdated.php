@@ -13,15 +13,17 @@ use Illuminate\Queue\SerializesModels;
 class TaskStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $foo = 'bar';
+
+    public $task;
+    // public $foo = 'bar';
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($task)
     {
-        //
+        $this->task = $task;
     }
 
     /**
@@ -33,5 +35,10 @@ class TaskStatusUpdated implements ShouldBroadcast
     {
         return new Channel('tasks');
         // return new PrivateChannel('channel-name');
+    }
+
+    public function broadcastAs()
+    {
+        return 'tasks';
     }
 }
