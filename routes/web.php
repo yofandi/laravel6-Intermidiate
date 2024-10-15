@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\TaskStatusUpdated;
 use App\Notifications\NewVisitor;
 use App\Notifications\TelegramNotif;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ app()->bind('contoh', function () {
 // });
 
 Route::get('/', function () {
+    TaskStatusUpdated::dispatch();
+
     $user =  Auth::user();
     // $user->notify(new NewVisitor("Welcome {$user->name}"));
     if (Auth::check()) {
