@@ -26,8 +26,18 @@ app()->bind('contoh', function () {
 //     return new \App\Tabungan;
 // });
 
+
+class Task
+{
+    public $id;
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
+}
+
 Route::get('/', function () {
-    TaskStatusUpdated::dispatch('dhfaha');
+    TaskStatusUpdated::dispatch(new Task(1));
 
     $user =  Auth::user();
     // $user->notify(new NewVisitor("Welcome {$user->name}"));
@@ -39,6 +49,11 @@ Route::get('/', function () {
     }
     return view('welcome');
     // dd(app('contoh'), app('contoh'));
+});
+
+Route::get('/update', function () {
+
+    TaskStatusUpdated::dispatch(new Task(10));
 });
 
 Route::get('/email/send', 'SendMailController@sendMail');
