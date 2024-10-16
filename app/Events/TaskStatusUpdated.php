@@ -14,16 +14,16 @@ class TaskStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $task;
+    public $tasks;
     // public $foo = 'bar';
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($task)
+    public function __construct($tasks)
     {
-        $this->task = $task;
+        $this->tasks = $tasks;
     }
 
     /**
@@ -35,10 +35,5 @@ class TaskStatusUpdated implements ShouldBroadcast
     {
         return new Channel('tasks');
         // return new PrivateChannel('channel-name');
-    }
-
-    public function broadcastAs()
-    {
-        return 'tasks';
     }
 }

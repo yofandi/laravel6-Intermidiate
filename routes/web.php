@@ -26,19 +26,8 @@ app()->bind('contoh', function () {
 //     return new \App\Tabungan;
 // });
 
-class Task
-{
-    public $id;
-
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
-}
-
 Route::get('/', function () {
-    TaskStatusUpdated::dispatch(new Task(2));
-    // event(new TaskStatusUpdated());
+    TaskStatusUpdated::dispatch('dhfaha');
 
     $user =  Auth::user();
     // $user->notify(new NewVisitor("Welcome {$user->name}"));

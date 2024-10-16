@@ -8,12 +8,12 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2.5|^8.0",
+        "php": "^7.2.5",
         "fideloper/proxy": "^4.4",
         "laravel-notification-channels/telegram": "^1.0",
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5",
-        "pusher/pusher-php-server": "^7.2"
+        "pusher/pusher-php-server": "^4.1"
     },
     "require-dev": {
         "facade/ignition": "^1.16.15",
