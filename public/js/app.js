@@ -3068,7 +3068,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   encrypted: true
 });
 window.Echo.channel("tasks").listen("TaskStatusUpdated", function (respone) {
-  console.log("task status has been updated.");
+  console.log("task " + respone.tasks.id + "  status has been updated.");
   console.log(respone);
 });
 

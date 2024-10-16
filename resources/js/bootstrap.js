@@ -41,6 +41,6 @@ window.Echo = new Echo({
 });
 
 window.Echo.channel("tasks").listen("TaskStatusUpdated", (respone) => {
-    console.log("task status has been updated.");
+    console.log("task " + respone.tasks.id + "  status has been updated.");
     console.log(respone);
 });
