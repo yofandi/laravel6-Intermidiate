@@ -1,5 +1,6 @@
 <?php
 
+use App\Task;
 use App\Events\TaskStatusUpdated;
 use App\Notifications\NewVisitor;
 use App\Notifications\TelegramNotif;
@@ -27,17 +28,17 @@ app()->bind('contoh', function () {
 // });
 
 
-class Task
-{
-    public $id;
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
-}
+// class Task
+// {
+//     public $id;
+//     public function __construct($id)
+//     {
+//         $this->id = $id;
+//     }
+// }
 
 Route::get('/', function () {
-    TaskStatusUpdated::dispatch(new Task(1));
+    // TaskStatusUpdated::dispatch(new Task(1));
 
     $user =  Auth::user();
     // $user->notify(new NewVisitor("Welcome {$user->name}"));
@@ -51,12 +52,27 @@ Route::get('/', function () {
     // dd(app('contoh'), app('contoh'));
 });
 
-Route::get('/update', function () {
+// Route::get('/update', function () {
 
-    TaskStatusUpdated::dispatch(new Task(10));
+//     TaskStatusUpdated::dispatch(new Task(10));
+// });
+
+
+Route::get('/tasks', function () {
+    return Task::latest()->pluck('body');
+});
+
+Route::post('/tasks', function () {
+    $task =  Task::forceCreate(request(['body']));
+
+    event(new TaskStatusUpdated($task));
 });
 
 Route::get('/email/send', 'SendMailController@sendMail');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

@@ -24,6 +24,8 @@ class TaskStatusUpdated implements ShouldBroadcast
     public function __construct($tasks)
     {
         $this->tasks = $tasks;
+
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**
