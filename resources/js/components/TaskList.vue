@@ -9,35 +9,33 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
 // Mendeklarasikan state
 const tasks = ref([]);
-const newTask = ref('');
+const newTask = ref("");
 
 // Mengambil data tasks saat komponen dimuat
-onMounted(() => {
-  axios.get('/tasks')
-    .then(response => {
-      tasks.value = response.data;
-    })
-    .catch(error => console.error('Error fetching tasks:', error));
+onMounted(async () => {
+    //   await axios.get('/tasks')
+    //     .then(response => {
+    //       tasks.value = response.data;
+    //     })
+    //     .catch(error => console.error('Error fetching tasks:', error));
+    const response = await axios.get("/tasks");
+    tasks.value = response.data;
+    console.log(tasks);
 
-  window.Echo.channel('tasks').listen('TaskStatusUpdated', response => {
-    tasks.value.push(response.task.body);
-  });
+    window.Echo.channel("tasks").listen("TaskStatusUpdated", (response) => {
+        tasks.value.push(response.task.body);
+    });
 });
 
 // Fungsi untuk menambah task
-const addTask = () => {
-  if (newTask.value.trim() === '') return; // Cek input kosong
-
-  axios.post('/tasks', { body: newTask.value })
-    .then(() => {
-      tasks.value.push({ body: newTask.value }); // Tambahkan task baru ke daftar
-      newTask.value = ''; // Reset input
-    })
-    .catch(error => console.error('Error adding task:', error));
+const addTask = async () => {
+    await axios.post("/tasks", { body: newTask.value });
+    tasks.value.push(newTask.value);
+    newTask.value = "";
 };
 </script>
