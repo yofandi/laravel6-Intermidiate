@@ -14,20 +14,19 @@ class TaskStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $tasks;
+    public $task1;
     // public $foo = 'bar';
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($tasks)
+    public function __construct($task1)
     {
-        $this->tasks = $tasks;
+        $this->task1 = $task1;
 
         $this->dontBroadcastToCurrentUser();
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
